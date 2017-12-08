@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>boston_housing</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>boston_housing_review1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -13855,6 +13855,44 @@ nzHGmJDy/w6IAKdaMSsVAAAAAElFTkSuQmCC
 <li><p>如果不使用交叉验证，想要通过调整参数来优化模型，就必须手动调节参数来进行验证，一方面参数多，调节麻烦，费时费力，另一方面，手动调节覆盖范围有限，很难得到最优参数模型，无论在模型的最优评分还是在模型稳定性上，均缺乏说服力；交叉验证通过对每一组数据的验证，得到准确的评分和好的鲁棒性，更具有说服力，且更稳定</p>
 </li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#31532;&#19968;&#27425;review&#24314;&#35758;&#65306;">&#31532;&#19968;&#27425;review&#24314;&#35758;&#65306;<a class="anchor-link" href="#&#31532;&#19968;&#27425;review&#24314;&#35758;&#65306;">&#182;</a></h4><p>这里关于K折交叉验证算法过程的回答来源于网络。请用自己的语言总结，独立完成回答，网络资源给出的内容可能是别人学习过程的中间产物，可以作为参考，但是并不一定正确，所以保持自己的辩证思维很重要，同时参考他人的成果时要给出引用。
+这里有许多问题需要注意，比如：</p>
+<ul>
+<li>使用K折交叉验证法时是将训练集分成了K份还是整个数据集呢？</li>
+<li>「平均K次的结果或者使用其它结合方式」这里就只是取平均值。</li>
+<li>「如果不使用交叉验证，想要通过调整参数来优化模型，就必须手动调节参数来进行验证，一方面参数多，调节麻烦，费时费力，另一方面，手动调节覆盖范围有限，很难得到最优参数模型，」这是网格搜索的功能和优点。</li>
+<li>K折交叉验证是这样的：如果数据量不大，随机性也不够好，比如分布有顺序性，那么分出来的验证集有可能只包含数据集中一种特点的数据，这时候在验证集上得到的分数可能是不准确的。有可能是模型拟合得比较好的数据，得到的成绩优于真实表现；有可能是模型拟合得比较差的数据，得到的成绩差于真实表现。如果使用K折交叉验证，那么就会取K次不同的验证集分数的平均值，多次取平均值能够减少对模型表现评分的误差，这样就可以更准确地找到最优参数。</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<h4 id="&#23545;&#31532;&#19968;&#27425;review&#30340;&#21453;&#39304;&#65306;">&#23545;&#31532;&#19968;&#27425;review&#30340;&#21453;&#39304;&#65306;<a class="anchor-link" href="#&#23545;&#31532;&#19968;&#27425;review&#30340;&#21453;&#39304;&#65306;">&#182;</a></h4><ol>
+<li>首先，原始回答来源于百度百科，我在参阅了百度百科后认为讲的很有道理，故加以引用（没有意识到百度百科词条需要标注引用，十分抱歉），在此加以注明引用</li>
+<li>用自己的语言描述K折交叉验证：我们常将数据切割为训练集和测试集，在训练集中，我们将其分割为K份，每次取其中的1份作为验证集，把其他的K-1份用于训练，每次验证都计算其所获得的分数，这样重复K次，完成交叉验证，最终获得K次验证集评分结果的平均值，作为评估结果分数。</li>
+<li>K折交叉验证法是将训练集分成K份。</li>
+<li>如2中描述，重复K次验证后，得到K次验证评分的平均值</li>
+<li><p>网格搜索中不使用交叉验证，可能的问题：训练数据的数据量不一定足够大，且可能并非随机分布，例如数据分类中前半部分数据全是A类，后半部分全是B类，此时切割的验证集可能只包含一种数据特点（例如验证集里全是B类数据，而训练集是在A类数据上训练的），那么验证集的分数就无法真实表现模型的优劣，起不到“验证”的作用；</p>
+<p>采用K折交叉验证，在训练数据内K次取值训练，然后取其验证评分的平均值，可以有效解决数据分布的问题，因此采用K折交叉验证，获得最优参数，是更准确，也更具有说服力的。</p>
+<hr>
+<p>Ref.</p>
+<p>1). <a href="https://baike.baidu.com/item/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/8543100?fr=aladdin#5_2">交叉验证</a></p>
+<p>2). <a href="https://zhuanlan.zhihu.com/p/25637642">网格搜索算法与K折交叉验证</a></p>
+</li>
+</ol>
 
 </div>
 </div>
